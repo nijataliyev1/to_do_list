@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Sometype Mono', monospace;
+}
+
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+}
+
+.container {
+    width: 336px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #C4C4C4 solid 1px;
+    border-radius: 10px;
+}
+
+
+.header {
+    width: 100%;
+    height: 28px;
+    background-color: #FFDC40;
+    border-radius: 9px 9px 0 0;
+}
+
+h1 {
+    margin: 20px 0;
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+}
+
+.margin {
+    width: 80%;
+}
+
+.sort-icon {
+    display: flex;
+    justify-content: flex-end;
+    margin: 8px 0;
+}
+
+.sort-icon button {
+    background-color: white;
+    border: none;
+    width: 25px;
+    height: 15px;   
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: #C4C4C4 solid 1px;
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 8px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.41px;
+}
+
+.list-footer input {
+    border: none;
+}
+
+.list-footer input:focus {
+    outline: none;
+}
+
+.add-button {
+    display: flex;
+    justify-content: flex-end;
+    margin: 30px 0;
+    color: white;
+    border: none;
+    height: 42px;
+    border-radius: 21px;
+    position: relative;
+    width: 150px;
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    background-color: #833AE0;
+}
+
+.plus {
+    height: 100%;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    background-color: #9953F1;
+}
+
+.add {
+    height: 100%;
+    border-radius: 21px;
+    width: calc(100% - 42px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.display-none {
+        display: none;
+ }
