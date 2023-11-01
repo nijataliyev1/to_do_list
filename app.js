@@ -1,13 +1,20 @@
-let order = 1;
+function orderList() {
+    let items = document.querySelectorAll(".list-added");
+    let order = 1;
+    items.forEach(item => {
+        let content = item.children[0].textContent;
+        item.children[0].textContent = String(order++) + ". " + item.children[0].textContent.substring(item.children[0].textContent.indexOf(".") + 2,item.children[0].textContent.length); 
+    })
+}
 
-function addNewItem (parent,order,content,add) {
+function addNewItem (parent,content,add) {
     let innerHtmlItem = "<p></p>\n<img src=\"./images/cancel.svg\" alt=\"cancel\" class=\"cancel\">";
     let item = document.createElement("div");
     item.classList.add("list-added");
     item.classList.add("list-item");
     item.innerHTML = innerHtmlItem;
     let contentElement = item.children[0];
-    contentElement.textContent = String(order) + ". " + content;
+    contentElement.textContent = ". " + content;
     item.children[1].addEventListener("mouseover", event => {
             event.target.src = "./images/cancel_hover.svg"
     })
@@ -19,9 +26,11 @@ function addNewItem (parent,order,content,add) {
         if (getList().length == 0 && document.querySelector(".list-footer").classList.contains("display-none")) {
             document.querySelector(".list-footer").classList.remove("display-none"); //bu setri sorus
         }
+        orderList();
     })
     if (add) {
         parent.insertBefore(item,parent.children[parent.children.length - 1]);
+        orderList();
         event.target.value = "";
     }
     return item;
@@ -33,7 +42,7 @@ function getInputContent() {
 
 document.querySelector(".list-footer input").addEventListener("keyup", event => {
     if (getInputContent().split(" ").length - 1 != getInputContent().length && event.key == "Enter") {
-        addNewItem(document.querySelector(".container").children[3],order++,event.target.value,true);
+        addNewItem(document.querySelector(".container").children[3],event.target.value,true);
         event.target.parentElement.classList.add("display-none");
     }
 })
@@ -58,7 +67,7 @@ document.querySelector(".add-button").addEventListener("click", event => {
         listFooter.classList.remove("display-none")
     }
     else if (input.value.split(" ").length - 1 != input.value.length) {
-        addNewItem(document.querySelector(".container").children[3],order++,input.value,true);
+        addNewItem(document.querySelector(".container").children[3],input.value,true);
         input.parentElement.classList.add("display-none");
         input.value = "";
     }
@@ -68,31 +77,14 @@ function getList() {
     let rtr = [];
 
     document.querySelectorAll(".list-added").forEach(item => {
-        rtr.push(item.children[0].textContent);
+        rtr.push(item.children[0].textContent.substring(item.children[0].textContent.indexOf(".") + 2,item.children[0].textContent.length));
     })
     return rtr;
-}
-
-function getListWithoutNumber() {
-    return getList().map(item => {
-        return item.substring(item.indexOf(".") + 2,item.length);
-    })
 }
 
 function getSortedList() {
     let rtr = []; 
-    let sortedWithoutNumber = getListWithoutNumber().sort();
-    let unsorted = getList();
-    sortedWithoutNumber.forEach(item => {
-        unsorted.forEach((item1,index) => {
-            if (item1.substring(item1.indexOf(".") + 2,item1.length) == item) {
-                rtr.push(item1);
-                unsorted.splice(index,1);
-            }
-        })
-    })
-
-    return rtr;
+    return getList().sort();
 }
 
 function getSortedReversedList() {
@@ -106,6 +98,7 @@ document.querySelector(".sort img").addEventListener("mouseover", event => {
     else {
         event.target.src = "./images/sort_hover.svg";
     }
+    
 })
 
 document.querySelector(".sort img").addEventListener("mouseleave", event => {
@@ -133,6 +126,7 @@ document.querySelector(".sort img").addEventListener("click", event => {
         item.remove();
     })
     arrray.forEach(item => {
-        addNewItem(document.querySelector(".container").children[3],item.substring(0,item.indexOf(".")),item.substring(item.indexOf(".") + 1,item.length),true);
+        addNewItem(document.querySelector(".container").children[3],item,true);
     })
+    orderList();
 })
